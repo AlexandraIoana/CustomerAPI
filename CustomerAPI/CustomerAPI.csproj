@@ -6,6 +6,10 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Data\Interfaces\" />
+    <Folder Include="Data\Repositories\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
