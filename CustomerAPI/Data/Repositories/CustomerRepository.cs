@@ -12,17 +12,14 @@ namespace CustomerAPI.Data.Repositories
 {
     public class CustomerRepository: BaseRepository, ICustomerRepository
     {
-        IAccountService _accountService;
-        public CustomerRepository(AppDbContext context, IAccountService accountService) : base(context)
+        public CustomerRepository(AppDbContext context) : base(context)
         {
-            _accountService = accountService;
+            
         }
 
         public async Task<Customer> GetCustomerAsync(int id)
         {
-            var customer = await _context.Customers.FindAsync(id);
-            customer.Accounts = _accountService.GetAccountsForCustomerAsync(id).Result.ToList();
-            return customer;
+            return await _context.Customers.FindAsync(id);            
         }
     }
 }

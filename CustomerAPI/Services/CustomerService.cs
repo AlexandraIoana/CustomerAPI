@@ -11,15 +11,19 @@ namespace CustomerAPI.Services
     public class CustomerService : ICustomerService
     {
         private readonly ICustomerRepository _userRepository;
+        private readonly IAccountService _accountService;
 
-        public CustomerService(ICustomerRepository userRepository)
+        public CustomerService(ICustomerRepository userRepository, IAccountService accountService)
         {
             _userRepository = userRepository;
+            _accountService = accountService;
         }
 
         public async Task<Customer> GetCustomerAsync(int id)
         {
-            return await _userRepository.GetCustomerAsync(id);
+            var customer = await _userRepository.GetCustomerAsync(id);
+            customer.Accounts = _accountService.GetAccountsForCustomerAsync(id).Result.ToList();
+            return customer;
         }
     }
 }
