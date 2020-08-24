@@ -22,9 +22,9 @@ namespace CustomerAPI_Tests
             accounts = new List<Account>()
             {
                 new Account { ID = 1, Balance = 21, Transactions = new List<Transaction>(), CustomerID = 1},
-                new Account { ID = 1, Balance = 21, Transactions = new List<Transaction>(), CustomerID = 1},
-                new Account { ID = 1, Balance = 21, Transactions = new List<Transaction>(), CustomerID = 1},
-                new Account { ID = 1, Balance = 21, Transactions = new List<Transaction>(), CustomerID = 1}
+                new Account { ID = 2, Balance = 2.31M, Transactions = new List<Transaction>(), CustomerID = 1},
+                new Account { ID = 3, Balance = 21.1M, Transactions = new List<Transaction>(), CustomerID = 1},
+                new Account { ID = 4, Balance = 0, Transactions = new List<Transaction>(), CustomerID = 1}
             };
 
             _accountServiceMock = new Mock<IAccountService>();
