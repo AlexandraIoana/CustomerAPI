@@ -1,6 +1,7 @@
 ﻿using CustomerAPI.Data.Contexts;
 using CustomerAPI.Data.Interfaces;
 using CustomerAPI.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,17 @@ namespace CustomerAPI.Data.Repositories
 {
     public class CustomerRepository: BaseRepository, ICustomerRepository
     {
-        public CustomerRepository(AppDbContext context) : base(context)
+        IAccountRepository _accountRepository;
+        public CustomerRepository(AppDbContext context, IAccountRepository accountRepository) : base(context)
         {
+            _accountRepository = accountRepository;
         }
 
         public async Task<Customer> GetCustomerAsync(int id)
         {
-            return await _context.Customers.FindAsync(id);
+            var customer = await _context.Customers.FindAsync(id);
+            customer.Accounts = _accountRepository.GetAccountsForCustomerAsync(id).Result.ToList();
+            return customer;
         }
     }
 }

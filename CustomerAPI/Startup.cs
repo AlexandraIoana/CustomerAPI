@@ -38,6 +38,8 @@ namespace CustomerAPI
             });
 
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+
             services.AddScoped<ICustomerService, CustomerService>();
         }
 
