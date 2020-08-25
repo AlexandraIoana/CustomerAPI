@@ -9,5 +9,7 @@ namespace CustomerAPI.Data.Interfaces
     public interface IAccountRepository
     {
         Task<IEnumerable<Account>> GetAccountsForCustomerAsync(int id);
+
+        Task PostAccountAsync(Account account);
     }
 }

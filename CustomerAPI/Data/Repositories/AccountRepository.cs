@@ -19,5 +19,10 @@ namespace CustomerAPI.Data.Repositories
         {
             return await _context.Accounts.Where(a => a.CustomerID == id).ToListAsync();
         }
+
+        public async Task PostAccountAsync(Account account)
+        {
+            await _context.Accounts.AddAsync(account);
+        }
     }
 }

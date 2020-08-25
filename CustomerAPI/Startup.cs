@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using CustomerAPI.Data.Contexts;
 using CustomerAPI.Data.Interfaces;
 using CustomerAPI.Data.Repositories;
@@ -32,7 +33,7 @@ namespace CustomerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-
+                        
             services.AddDbContext<AppDbContext>(options => {
                 options.UseInMemoryDatabase("account-api");
             });
@@ -41,9 +42,13 @@ namespace CustomerAPI
             services.AddScoped<IAccountRepository, AccountRepository>();
             services.AddScoped<ITransactionRepository, TransactionRepository>();
 
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ITransactionService, TransactionService>();
+
+            services.AddAutoMapper(typeof(Startup));
 
         }
 

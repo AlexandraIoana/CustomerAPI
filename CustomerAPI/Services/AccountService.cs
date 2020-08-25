@@ -1,6 +1,7 @@
 ﻿using CustomerAPI.Data.Interfaces;
 using CustomerAPI.Data.Models;
 using CustomerAPI.Interfaces;
+using CustomerAPI.Resources.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,13 +12,15 @@ namespace CustomerAPI.Services
 {
     public class AccountService : IAccountService
     {
-        IAccountRepository _accountRepository;
-        ITransactionService _transactionService;
+        private readonly IAccountRepository _accountRepository;
+        private readonly ITransactionService _transactionService;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public AccountService(IAccountRepository accountRepository, ITransactionService transactionService)
+        public AccountService(IAccountRepository accountRepository, ITransactionService transactionService, IUnitOfWork unitOfWork)
         {
             _accountRepository = accountRepository;
             _transactionService = transactionService;
+            _unitOfWork = unitOfWork;
         }
         public async Task<IEnumerable<Account>> GetAccountsForCustomerAsync(int id)
         {
@@ -29,6 +32,22 @@ namespace CustomerAPI.Services
             }
 
             return accounts;
+        }
+
+        public async Task<SaveAccountResponse> PostAccountAsync(Account account)
+        {
+            try
+            {
+                await _accountRepository.PostAccountAsync(account);
+                await _unitOfWork.CompleteAsync();
+
+                return new SaveAccountResponse(account);
+            }
+            catch (Exception ex)
+            {
+                // Do some logging stuff
+                return new SaveAccountResponse($"An error occurred when saving the category: {ex.Message}");
+            }
         }
     }
 }
