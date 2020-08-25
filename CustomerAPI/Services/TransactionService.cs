@@ -21,5 +21,10 @@ namespace CustomerAPI.Services
         {
             return await _transactionRepository.GetTransactionsForAccountAsync(id);
         }
+
+        public async Task PostTransactionAsync(Transaction transaction)
+        {
+            await _transactionRepository.PostTransactionAsync(transaction);
+        }
     }
 }

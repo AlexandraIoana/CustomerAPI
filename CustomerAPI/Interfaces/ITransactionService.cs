@@ -9,5 +9,7 @@ namespace CustomerAPI.Interfaces
     public interface ITransactionService
     {
         Task<IEnumerable<Transaction>> GetTransactionsForAccountAsync(int id);
+
+        Task PostTransactionAsync(Transaction transaction);
     }
 }

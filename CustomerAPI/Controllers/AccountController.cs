@@ -20,7 +20,7 @@ namespace CustomerAPI.Controllers
         IAccountService _accountService;
         IMapper _mapper;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        public AccountController(IAccountService accountService, IMapper mapper, ITransactionService transactionService)
         {
             _accountService = accountService;
             _mapper = mapper;
@@ -33,7 +33,6 @@ namespace CustomerAPI.Controllers
                 return BadRequest(ModelState.GetErrorMessages());
 
             var account = _mapper.Map<SaveAccountResource, Account>(resource);
-
 
             var result = await _accountService.PostAccountAsync(account);
 

@@ -11,5 +11,6 @@ namespace CustomerAPI.Data.Interfaces
         Task<IEnumerable<Account>> GetAccountsForCustomerAsync(int id);
 
         Task PostAccountAsync(Account account);
+
     }
 }

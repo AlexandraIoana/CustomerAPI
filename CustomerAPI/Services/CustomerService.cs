@@ -10,18 +10,18 @@ namespace CustomerAPI.Services
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ICustomerRepository _userRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IAccountService _accountService;
 
         public CustomerService(ICustomerRepository userRepository, IAccountService accountService)
         {
-            _userRepository = userRepository;
+            _customerRepository = userRepository;
             _accountService = accountService;
         }
 
         public async Task<Customer> GetCustomerAsync(int id)
         {
-            var customer = await _userRepository.GetCustomerAsync(id);
+            var customer = await _customerRepository.GetCustomerAsync(id);
             customer.Accounts = _accountService.GetAccountsForCustomerAsync(id).Result.ToList();
             return customer;
         }

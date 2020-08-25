@@ -22,6 +22,8 @@ namespace CustomerAPI.Services
             _transactionService = transactionService;
             _unitOfWork = unitOfWork;
         }
+
+
         public async Task<IEnumerable<Account>> GetAccountsForCustomerAsync(int id)
         {
             var accounts = await _accountRepository.GetAccountsForCustomerAsync(id);
@@ -36,9 +38,16 @@ namespace CustomerAPI.Services
 
         public async Task<SaveAccountResponse> PostAccountAsync(Account account)
         {
+            Transaction transaction = new Transaction();
+           
             try
             {
-                await _accountRepository.PostAccountAsync(account);
+                await _accountRepository.PostAccountAsync(account);                
+
+                transaction.AccountID = account.ID;
+                transaction.Amount = account.Balance;
+
+                await _transactionService.PostTransactionAsync(transaction);
                 await _unitOfWork.CompleteAsync();
 
                 return new SaveAccountResponse(account);
@@ -46,7 +55,7 @@ namespace CustomerAPI.Services
             catch (Exception ex)
             {
                 // Do some logging stuff
-                return new SaveAccountResponse($"An error occurred when saving the category: {ex.Message}");
+                return new SaveAccountResponse($"An error occurred when saving the account: {ex.Message}");
             }
         }
     }
