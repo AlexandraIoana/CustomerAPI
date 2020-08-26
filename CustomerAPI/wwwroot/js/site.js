@@ -156,7 +156,7 @@ function _displayCustomer(data) {
             balanceTable.appendChild(balanceTr);
             panelBodyDiv.appendChild(balanceTable);
 
-            if (item.transactions && Array.isArray(item.transactions)) {
+            if (item.transactions.length > 0 && Array.isArray(item.transactions)) {
 
                 var transactionsTable = document.createElement('table');
                 transactionsTable.classList.add('table');
