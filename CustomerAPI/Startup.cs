@@ -33,7 +33,9 @@ namespace CustomerAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
-                        
+
+            services.AddControllers().AddNewtonsoftJson();
+
             services.AddDbContext<AppDbContext>(options => {
                 options.UseInMemoryDatabase("account-api");
             });
@@ -59,6 +61,9 @@ namespace CustomerAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseHttpsRedirection();
 

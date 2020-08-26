@@ -40,13 +40,20 @@ namespace CustomerAPI.Services
             {
                 await _accountRepository.PostAccountAsync(account);
 
-                Transaction transaction = new Transaction()
+                if (account.Balance > 0)
                 {
-                    AccountID = account.ID,
-                    Amount = account.Balance
-                };
+                    Transaction transaction = new Transaction()
+                    {
+                        AccountID = account.ID,
+                        Amount = account.Balance
+                    };
 
-                await _transactionService.PostTransactionAsync(transaction);
+                    await _transactionService.PostTransactionAsync(transaction);
+                }
+                
+
+
+                
 
                 await _unitOfWork.CompleteAsync();
 
