@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>CustomerAPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container text-justify" style="margin-bottom:150px">
+        <h1>Postman instructions</h1>
+
+        <a href="index.html" class="text-muted">&lArr; Go back</a>
+
+        <h3>What is Postman?</h3>
+        <p>Postman is a scalable API testing tool that quickly integrates into CI/CD pipeline.</p>
+
+        <h3>Download and install Postman</h3>
+        <p>Being an open source tool, Postman can be easily downloaded from <a href="https://www.postman.com/downloads/">here</a>. After downloading it, click the .exe installer and follow the instructions it provides. Once Postman is installed, you need to close all the welcome messages and you will see a screen like this one:</p>
+        <img src="images/homepage.jpg" alt="Postman home view" style="width:90%;  display: block; margin:auto" />
+        <p class="text-center"><em>Postman home view</em></p>
+
+        <h3>Running GET request</h3>
+        <p>For the purpose of this assignment I created a GET endpoint that retrieves the data associated with a Customer ID. There are six different customers, with IDs ranging from 1 to 6, loaded in the InMemory database. Any of them can be used for testing purposes.</p>
+        <p>In order to test the GET request you need to leave the CustomerAPI app running, and then, in Postman you need to follow these steps:</p>
+        <ol>
+            <li>
+                <p>Ensure that the request method is set to GET, as seen below:</p>
+                <img src="images/getmethod.jpg" alt="Postman GET method" style="width:10%;  display: block; margin:auto" />
+                <p class="text-center"><em>Postman GET method</em></p>
+            </li>
+            <li>
+                <p>Type this URL:"https://localhost:44351/api/customer/《add_desired_customer_id_here》" into the "Enter request URL" section. Your full request should look like this:</p>
+                <img src="images/getmethodcomplete.jpg" alt="Postman complete GET method" style="width:90%;  display: block; margin:auto" />
+                <p class="text-center"><em>Postman complete GET method</em></p>
+            </li>
+            <li>
+                <p>Press "Send". If everything went well, you should see the customer data in the "Response" section of the app.</p>
+            </li>
+        </ol>
+
+        <h3>Running POST request</h3>
+        <p>For the purpose of this assignment I created a POST endpoint that creates a new account for a Customer ID and an Initial Balance. If the Initial Balance is greater than 0, than a new transaction for the account is created as well. There are six different customers, with IDs ranging from 1 to 6, loaded in the InMemory database. Any of them can be used for testing purposes.</p>
+        <p>In order to test the POST request you need to leave the CustomerAPI app running, and then, in Postman you need to follow these steps:</p>
+        <ol>
+            <li>
+                <p>Ensure that the request method is set to POST, as seen below:</p>
+                <img src="images/postmethod.jpg" alt="Postman POST method" style="width:10%;  display: block; margin:auto" />
+                <p class="text-center"><em>Postman POST method</em></p>
+            </li>
+            <li>
+                <p>Type this URL:"https://localhost:44351/api/account" into the "Enter request URL" section. Your full request should look like this:</p>
+                <img src="images/postmethodurl.jpg" alt="Postman POST method URL" style="width:90%;  display: block; margin:auto" />
+                <p class="text-center"><em>Postman POST method URL</em></p>
+            </li>
+            <li>
+                <p>
+                    Select the "Body" tab under the request data and insert the following JSON data:
+                    <pre>
+                        {
+                            "CustomerID":《add_desired_customer_id_here》,
+                            "InitialCredit":《add_desired_customer_id_here》
+	                }
+                    </pre>
+                    After following all the steps your Postman your window should look similar to this:
+                </p>
+                <img src="images/postmethodcomplete.jpg" alt="Postman complete POST method" style="width:90%;  display: block; margin:auto" />
+                <p class="text-center"><em>Postman complete POST method</em></p>
+            </li>
+            <li>
+                <p>Press "Send". If everything went, well you should see the account data in the "Response" section of the app.</p>
+            </li>
+        </ol>
+
+    </div>
+</body>
+</html>

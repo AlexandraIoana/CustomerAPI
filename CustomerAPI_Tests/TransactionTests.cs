@@ -30,7 +30,7 @@ namespace CustomerAPI_Tests
             _transactionServiceMock.Setup(a => a.GetTransactionsForAccountAsync(1)).ReturnsAsync(transactions);
         }
 
-
+        #region GET TESTS
         [Test]
         public void GetTransactionsForAccountAsync_ExistingIdPassed_ReturnsCorrectDataType()
         {
@@ -56,5 +56,9 @@ namespace CustomerAPI_Tests
             //Assert
             Assert.AreEqual(validTransactions, transactions);
         }
+
+        #endregion
+
+
     }
 }

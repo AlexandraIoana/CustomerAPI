@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>CustomerAPI</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>CustomerAPI</h1>
+
+        <p>There are two ways of testing this API:</p>
+        <ol>
+            <li><b>Using frontend:</b> By using the frontend forms provided below.</li>
+            <li><b>Frontend independent:</b> By using Postman to generate the requests. If you do not have experience with Postman you can find instructions on how to use it <a href="postman-instructions.html">here</a>.</li>
+        </ol>
+
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#getcustomer" onclick="clearDataDiv()">Get customer data</a></li>
+            <li><a data-toggle="tab" href="#postaccount" onclick="clearDataDiv()">Add new account</a></li>
+        </ul>
+        <div class="tab-content">
+            <div id="getcustomer" class="tab-pane fade in active">
+                <h3>Get customer data</h3>
+                <form action="javascript:void(0);" method="GET" onsubmit="getCustomer()">
+                    <div class="form-group">
+                        <label for="get-customer-id">Your customer ID:</label>
+                        <input type="number" id="get-customer-id" min="1" max="6" placeholder="Customer ID" class="form-control"  required/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get customer</button>
+
+                </form>
+            </div>
+            <div id="postaccount" class="tab-pane fade">
+                <h3>Add new account</h3>
+                <form action="javascript:void(0);" method="POST" onsubmit="addAccount()">
+                    <div class="form-group">
+                        <label for="add-customer-id">Your customer ID:</label>
+                        <input type="number" id="add-customer-id" min="1" max="6" placeholder="Customer ID"  class="form-control"  required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="add-initial-credit">Initial credit:</label>
+                        <input type="number" id="add-initial-credit" step="0.01" placeholder="Initial credit"  class="form-control"  required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create account</button>
+                </form>
+            </div>
+
+        </div>
+
+
+        <div id="dataDivWrapper" class="panel panel-default" style="margin-top:20px; display:none;">
+            <div class="panel-heading">
+                <h3>Results</h3>
+            </div>
+            <div id="dataDiv" class="panel-body">
+
+            </div>
+
+        </div>
+
+
+
+        <script src="js/site.js" asp-append-version="true"></script>
+
+    </div>     
+
+        
+</body>
+</html>

@@ -1,4 +1,5 @@
 ﻿using CustomerAPI.Data.Models;
+using CustomerAPI.Resources.Communication;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace CustomerAPI.Interfaces
     {
         Task<IEnumerable<Transaction>> GetTransactionsForAccountAsync(int id);
 
-        Task PostTransactionAsync(Transaction transaction);
+        Task<SaveTransactionResponse> PostTransactionAsync(Transaction transaction);
     }
 }
