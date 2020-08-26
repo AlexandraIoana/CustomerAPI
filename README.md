@@ -9,4 +9,4 @@ The easiest way to run this API is to:
 
 4. In the window that opens, you need to navigate to the unzipped file location and select "CustomerAPI.sln". This will load the full project.
 
-5. Once the project is loaded in Visual Studio you simply need to press F5 and then the page that will open will give further instructions.
+5. Once the project is loaded in Visual Studio you simply need to press F5 and then the page that will open will give you further instructions.
