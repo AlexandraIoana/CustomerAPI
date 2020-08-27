@@ -12,6 +12,6 @@ The easiest way to run this API is to:
 5. Once the project is loaded in Visual Studio you simply need to press F5 and then the page that will open will give you further instructions.
 
 
-#Important
+### Important
 
-Due to the fact that this API was developed using .NET Core 3.1 you will need to use Visual Studio 2019 to run it, as older versions of the IDE do no support this SDK.
+Due to the fact that this API was developed using **.NET Core 3.1** you will need to use **Visual Studio 2019** to run it, as older versions of the IDE do no support this SDK.
