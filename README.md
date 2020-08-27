@@ -1,7 +1,7 @@
 # Instructions
 The easiest way to run this API is to:
 
-1. Press the green "Code" button in the top left corner and select "Download ZIP". 
+1. Press the green "Code" button in the top right corner and select "Download ZIP". 
 
 2. Unzip the downloaded folder.
 
