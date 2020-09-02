@@ -55,7 +55,7 @@ namespace CustomerAPI_Tests
             _accountServiceMock.Setup(a => a.GetAccountsForCustomerAsync(1)).ReturnsAsync(accounts);
             _accountServiceMock.Setup(a => a.PostAccountAsync(It.IsAny<Account>())).ReturnsAsync(new SaveAccountResponse(accountToTestSave));
 
-            var mapperProfile = new ResourceToModelProfile();
+            var mapperProfile = new DtoToViewModelProfile();
             var configuration = new MapperConfiguration(cfg => cfg.AddProfile(mapperProfile));
             _mapper = new Mapper(configuration);
 

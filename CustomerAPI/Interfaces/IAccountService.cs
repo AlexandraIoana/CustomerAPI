@@ -1,15 +1,13 @@
-﻿using CustomerAPI.Data.Models;
-using CustomerAPI.Resources.Communication;
-using System;
+﻿using CustomerAPI.Resources.Communication;
+using CustomerAPI.Resources.ViewModels;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CustomerAPI.Interfaces
 {
     public interface IAccountService
     {
-        Task<IEnumerable<Account>> GetAccountsForCustomerAsync(int id);
-        Task<SaveAccountResponse> PostAccountAsync(Account account);
+        Task<List<AccountViewModel>> GetAccountsForCustomerAsync(int id);
+        Task<SaveAccountResponse> PostAccountAsync(int customerId, decimal initialCredit);
     }
 }

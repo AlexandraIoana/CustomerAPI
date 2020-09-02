@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
-using CustomerAPI.Data.Models;
 using CustomerAPI.Interfaces;
-using CustomerAPI.Resources;
 using CustomerAPI.Resources.Classes;
 using CustomerAPI.Resources.Extensions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerAPI.Controllers
@@ -32,15 +26,12 @@ namespace CustomerAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState.GetErrorMessages());
 
-            var account = _mapper.Map<SaveAccountResource, Account>(resource);
-
-
-            var result = await _accountService.PostAccountAsync(account);
+            var result = await _accountService.PostAccountAsync(resource.CustomerID, resource.InitialCredit);
 
             if (!result.Success)
                 return BadRequest(result.Message);
 
-            return Ok(account);
+            return Ok(result.Account);
         }
     }
 }

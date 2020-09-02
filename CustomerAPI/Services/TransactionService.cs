@@ -1,7 +1,9 @@
-﻿using CustomerAPI.Data.Interfaces;
-using CustomerAPI.Data.Models;
+﻿using AutoMapper;
 using CustomerAPI.Interfaces;
 using CustomerAPI.Resources.Communication;
+using CustomerAPI.Resources.ViewModels;
+using CustomerAPI_Business.Entities;
+using CustomerAPI_Business.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,26 +15,33 @@ namespace CustomerAPI.Services
     {
         ITransactionRepository _transactionRepository;
         IUnitOfWork _unitOfWork;
+        IMapper _mapper;
 
-        public TransactionService(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork)
+        public TransactionService(ITransactionRepository transactionRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _transactionRepository = transactionRepository;
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public async Task<IEnumerable<Transaction>> GetTransactionsForAccountAsync(int id)
+        public async Task<List<TransactionViewModel>> GetTransactionsForAccountAsync(int id)
         {
-            return await _transactionRepository.GetTransactionsForAccountAsync(id);
+            var transactions = await _transactionRepository.GetTransactionsForAccountAsync(id);
+
+            return _mapper.Map<List<TransactionDto>, List<TransactionViewModel>>(transactions);
         }
 
-        public async Task<SaveTransactionResponse> PostTransactionAsync(Transaction transaction)
+        public async Task<SaveTransactionResponse> PostTransactionAsync(int accountId, decimal amount)
         {
             try
             {
-                await _transactionRepository.PostTransactionAsync(transaction);
+                int transactionId = await _transactionRepository.PostTransactionAsync(accountId, amount);
                 await _unitOfWork.CompleteAsync();
 
-                return new SaveTransactionResponse(transaction);
+                TransactionDto transactionDto = await _transactionRepository.GetTransaction(transactionId);
+                TransactionViewModel transactionViewModel = _mapper.Map<TransactionDto, TransactionViewModel>(transactionDto);
+
+                return new SaveTransactionResponse(transactionViewModel);
             }
             catch (Exception ex)
             {

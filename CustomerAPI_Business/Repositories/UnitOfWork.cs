@@ -1,11 +1,8 @@
-﻿using CustomerAPI.Data.Contexts;
-using CustomerAPI.Data.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CustomerAPI_Business.Interfaces;
+using CustomerAPI_Infrastucture.Data;
 using System.Threading.Tasks;
 
-namespace CustomerAPI.Data.Repositories
+namespace CustomerAPI_Business.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {

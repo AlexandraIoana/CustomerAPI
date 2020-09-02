@@ -1,16 +1,12 @@
-﻿using CustomerAPI.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CustomerAPI.Resources.ViewModels;
 
 namespace CustomerAPI.Resources.Communication
 {
     public class SaveTransactionResponse : BaseResponse
     {
-        public Transaction Transaction { get; private set; }
+        public TransactionViewModel Transaction { get; private set; }
 
-        private SaveTransactionResponse(bool success, string message, Transaction transaction) : base(success, message)
+        private SaveTransactionResponse(bool success, string message, TransactionViewModel transaction) : base(success, message)
         {
             Transaction = transaction;
         }
@@ -20,7 +16,7 @@ namespace CustomerAPI.Resources.Communication
         /// </summary>
         /// <param name="transaction">Saved transaction.</param>
         /// <returns>Response.</returns>
-        public SaveTransactionResponse(Transaction transaction) : this(true, string.Empty, transaction)
+        public SaveTransactionResponse(TransactionViewModel transaction) : this(true, string.Empty, transaction)
         { }
 
         /// <summary>

@@ -1,13 +1,10 @@
-﻿using CustomerAPI.Data.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CustomerAPI.Resources.ViewModels;
 using System.Threading.Tasks;
 
 namespace CustomerAPI.Interfaces
 {
     public interface ICustomerService
     {
-        Task<Customer> GetCustomerAsync(int id);
+        Task<CustomerViewModel> GetCustomerAsync(int id);
     }
 }

@@ -1,22 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
-using CustomerAPI.Data.Contexts;
-using CustomerAPI.Data.Interfaces;
-using CustomerAPI.Data.Repositories;
 using CustomerAPI.Interfaces;
 using CustomerAPI.Services;
+using CustomerAPI_Business.Interfaces;
+using CustomerAPI_Business.Repositories;
+using CustomerAPI_Infrastucture.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CustomerAPI
 {
@@ -68,8 +62,6 @@ namespace CustomerAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

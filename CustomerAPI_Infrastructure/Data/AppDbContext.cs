@@ -1,11 +1,7 @@
-﻿using CustomerAPI.Data.Models;
+﻿using CustomerAPI_Infrastucture.Data.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CustomerAPI.Data.Contexts
+namespace CustomerAPI_Infrastucture.Data
 {
     public class AppDbContext : DbContext
     {
@@ -43,18 +39,17 @@ namespace CustomerAPI.Data.Contexts
             builder.Entity<Account>().ToTable("Accounts");
             builder.Entity<Account>().HasKey(a => a.ID);
             builder.Entity<Account>().Property(a => a.ID).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Account>().Property(a => a.Balance).IsRequired();
             builder.Entity<Account>().HasMany(a => a.Transactions).WithOne(t => t.Account).HasForeignKey(t => t.AccountID);
             builder.Entity<Account>().HasData
                 (
-                    new Account { ID = 1, Balance = 21.2M, CustomerID = 1 },
-                    new Account { ID = 2, Balance = 0, CustomerID = 2 },
-                    new Account { ID = 3, Balance = 25.7M, CustomerID = 1 },
-                    new Account { ID = 4, Balance = 53.1M, CustomerID = 3 },
-                    new Account { ID = 5, Balance = 34M, CustomerID = 4 },
-                    new Account { ID = 6, Balance = 0, CustomerID = 5 },
-                    new Account { ID = 7, Balance = 11.6M, CustomerID = 4 },
-                    new Account { ID = 8, Balance = 51.2M, CustomerID = 6 }
+                    new Account { ID = 1, CustomerID = 1 },
+                    new Account { ID = 2, CustomerID = 2 },
+                    new Account { ID = 3, CustomerID = 1 },
+                    new Account { ID = 4, CustomerID = 3 },
+                    new Account { ID = 5, CustomerID = 4 },
+                    new Account { ID = 6, CustomerID = 5 },
+                    new Account { ID = 7, CustomerID = 4 },
+                    new Account { ID = 8, CustomerID = 6 }
                 );
 
             // Setup Transactions table

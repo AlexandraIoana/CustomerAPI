@@ -1,10 +1,6 @@
-﻿using CustomerAPI.Data.Contexts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CustomerAPI_Infrastucture.Data;
 
-namespace CustomerAPI.Data.Repositories
+namespace CustomerAPI_Business.Repositories
 {
     public abstract class BaseRepository
     {
