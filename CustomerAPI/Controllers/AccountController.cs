@@ -12,12 +12,10 @@ namespace CustomerAPI.Controllers
     public class AccountController : Controller
     {
         IAccountService _accountService;
-        IMapper _mapper;
 
-        public AccountController(IAccountService accountService, IMapper mapper)
+        public AccountController(IAccountService accountService)
         {
             _accountService = accountService;
-            _mapper = mapper;
         }
 
         [HttpPost]

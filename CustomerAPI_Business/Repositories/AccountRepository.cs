@@ -12,9 +12,11 @@ namespace CustomerAPI_Business.Repositories
     public class AccountRepository: BaseRepository, IAccountRepository
     {
         ITransactionRepository _transactionRepository;
-        public AccountRepository(AppDbContext context, ITransactionRepository transactionRepository) : base(context)
+        IUnitOfWork _unitOfWork;
+        public AccountRepository(AppDbContext context, ITransactionRepository transactionRepository, IUnitOfWork unitOfWork) : base(context)
         {
             _transactionRepository = transactionRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<List<AccountDto>> GetAccountsForCustomerAsync(int customerId)
@@ -55,7 +57,7 @@ namespace CustomerAPI_Business.Repositories
             return account;
         }
 
-        public async Task<int> PostAccountAsync(int customerId)
+        public async Task<int> PostAccountAsync(int customerId, decimal initialCredit)
         {
             Account account = new Account
             {
@@ -63,6 +65,15 @@ namespace CustomerAPI_Business.Repositories
             };
 
             await _context.Accounts.AddAsync(account);
+
+
+            if (initialCredit > 0)
+            {
+
+                await _transactionRepository.PostTransactionAsync(account.ID, initialCredit);
+            }
+
+            await _unitOfWork.CompleteAsync();
 
             return account.ID;
         }

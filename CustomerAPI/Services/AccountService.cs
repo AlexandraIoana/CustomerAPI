@@ -14,14 +14,12 @@ namespace CustomerAPI.Services
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly ITransactionService _transactionService;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public AccountService(IAccountRepository accountRepository, ITransactionService transactionService, IUnitOfWork unitOfWork, IMapper mapper)
+        public AccountService(IAccountRepository accountRepository, IUnitOfWork unitOfWork, IMapper mapper)
         {
             _accountRepository = accountRepository;
-            _transactionService = transactionService;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
@@ -37,16 +35,7 @@ namespace CustomerAPI.Services
         {
             try
             {
-                int accountId = await _accountRepository.PostAccountAsync(customerId);
-
-                if (initialCredit > 0)
-                {                    
-
-                    await _transactionService.PostTransactionAsync(accountId, initialCredit);
-                }      
-                                
-
-                await _unitOfWork.CompleteAsync();
+                int accountId = await _accountRepository.PostAccountAsync(customerId, initialCredit);
 
                 AccountDto accountDto = await _accountRepository.GetAccount(accountId);
                 AccountViewModel accountViewModel = _mapper.Map<AccountDto, AccountViewModel>(accountDto);

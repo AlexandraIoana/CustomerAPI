@@ -10,7 +10,7 @@ namespace CustomerAPI_Business.Interfaces
 
         Task<AccountDto> GetAccount(int id);
 
-        Task<int> PostAccountAsync(int customerId);
+        Task<int> PostAccountAsync(int customerId, decimal initialCredit);
 
     }
 }

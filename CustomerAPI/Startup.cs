@@ -42,7 +42,6 @@ namespace CustomerAPI
 
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IAccountService, AccountService>();
-            services.AddScoped<ITransactionService, TransactionService>();
 
             services.AddAutoMapper(typeof(Startup));
 

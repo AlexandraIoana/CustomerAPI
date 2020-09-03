@@ -27,16 +27,6 @@ namespace CustomerAPI_Business.Repositories
                             }).ToListAsync();
         }
 
-        public async Task<TransactionDto> GetTransaction(int id)
-        {
-            return await (from t in _context.Transactions
-                          where t.ID == id
-                          select new TransactionDto
-                          {
-                              ID = t.ID,
-                              Amount = t.Amount
-                          }).FirstOrDefaultAsync();
-        }
 
         public async Task<int> PostTransactionAsync(int accountId, decimal amount)
         {

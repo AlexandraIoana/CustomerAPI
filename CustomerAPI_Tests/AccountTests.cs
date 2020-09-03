@@ -1,16 +1,12 @@
 ﻿using AutoMapper;
 using CustomerAPI.Controllers;
-using CustomerAPI.Data.Models;
 using CustomerAPI.Interfaces;
 using CustomerAPI.Resources.Mapping;
 using Moq;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using CustomerAPI.Resources.Extensions;
 using CustomerAPI.Resources.Communication;
 using CustomerAPI.Resources.Classes;
 using Microsoft.AspNetCore.Mvc;

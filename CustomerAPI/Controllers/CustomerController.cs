@@ -19,8 +19,8 @@ namespace CustomerAPI.Controllers
         [HttpGet("{id}")]
         public async Task<CustomerViewModel> GetCustomerAsync(int id)
         {
-            var user = await _customerService.GetCustomerAsync(id);
-            return user;
+            var customerViewModel = await _customerService.GetCustomerAsync(id);
+            return customerViewModel;
         }
     }
 }

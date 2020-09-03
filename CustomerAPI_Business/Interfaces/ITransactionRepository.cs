@@ -10,8 +10,6 @@ namespace CustomerAPI_Business.Interfaces
     {
         Task<List<TransactionDto>> GetTransactionsForAccountAsync(int id);
 
-        Task<TransactionDto> GetTransaction(int id);
-
         Task<int> PostTransactionAsync(int accountId, decimal amount);
     }
 }
