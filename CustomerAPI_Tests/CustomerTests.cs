@@ -1,6 +1,7 @@
 using CustomerAPI.Controllers;
-using CustomerAPI.Data.Models;
 using CustomerAPI.Interfaces;
+using CustomerAPI.Resources.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -14,12 +15,12 @@ namespace CustomerAPI_Tests
     {
         Mock<ICustomerService> _customerServiceMock;
         CustomerController _customerController;
-        Customer customer;
+        CustomerViewModel customer;
 
         [SetUp]
         public void Setup()
         {
-            customer = new Customer() { ID = 1, Name = "Snow", Surname = "White", Accounts = new List<Account>() };
+            customer = new CustomerViewModel() { ID = 1, Name = "Snow", Surname = "White", Accounts = new List<AccountViewModel>() };
             _customerServiceMock = new Mock<ICustomerService>();
             _customerServiceMock.Setup(c => c.GetCustomerAsync(1)).ReturnsAsync(customer);
 
@@ -34,23 +35,23 @@ namespace CustomerAPI_Tests
             int notValidID = -1;
 
             //Act
-            Customer notFoundCustomer = await _customerController.GetCustomerAsync(notValidID);
+            var notFoundCustomer = await _customerController.GetCustomerAsync(notValidID);
 
-            //Assert
-            Assert.IsNull(notFoundCustomer);
+            // Assert
+            Assert.IsInstanceOf(typeof(NotFoundResult), notFoundCustomer.Result);
         }
 
         [Test]
-        public async Task GetCustomerAsync_ExistingIdPassed_ReturnsCorrectDataType()
+        public async Task GetCustomerAsync_ExistingIdPassed_ReturnsCorrectResponse()
         {
             // Arrange
             int validID = 1;
 
             //Act
-            Customer validCustomer = await _customerController.GetCustomerAsync(validID);
+            var validCustomer = await _customerController.GetCustomerAsync(validID);
 
             //Assert
-            Assert.IsInstanceOf(typeof(Customer), validCustomer);
+            Assert.IsInstanceOf(typeof(OkObjectResult), validCustomer.Result);
         }
 
         [Test]
@@ -60,10 +61,11 @@ namespace CustomerAPI_Tests
             int validID = 1;
 
             //Act
-            Customer validCustomer = await _customerController.GetCustomerAsync(validID);
-
+            var validCustomer = await _customerController.GetCustomerAsync(validID);
+            var item = (OkObjectResult)validCustomer.Result;
+            
             //Assert
-            Assert.AreEqual(validCustomer, customer);
+            Assert.AreEqual(customer, item.Value);
         }
     }
     

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CustomerAPI.Data.Models;
+﻿using System.Threading.Tasks;
 using CustomerAPI.Interfaces;
-using Microsoft.AspNetCore.Http;
+using CustomerAPI.Resources.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CustomerAPI.Controllers
@@ -21,10 +17,15 @@ namespace CustomerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Customer> GetCustomerAsync(int id)
+        public async Task<ActionResult<CustomerViewModel>> GetCustomerAsync(int id)
         {
-            var user = await _customerService.GetCustomerAsync(id);
-            return user;
+            var customerViewModel = await _customerService.GetCustomerAsync(id);
+
+            if (customerViewModel == null)
+            {
+                return NotFound();
+            }
+            return Ok(customerViewModel);
         }
     }
 }

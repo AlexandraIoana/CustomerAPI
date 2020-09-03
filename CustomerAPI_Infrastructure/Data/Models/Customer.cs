@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CustomerAPI.Data.Models
+namespace CustomerAPI_Infrastucture.Data.Models
 {
     public class Customer
     {
